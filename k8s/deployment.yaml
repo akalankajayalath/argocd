@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-docker-app-deployment
+  labels:
+    app: my-docker-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-docker-app
+  template:
+    metadata:
+      labels:
+        app: my-docker-app
+    spec:
+      containers:
+      - name: my-docker-app
+        image: nginx:latest # We'll override this with Argo CD Image Updater later if needed, but for now, we'll use a direct image.
+        ports:
+        - containerPort: 80
